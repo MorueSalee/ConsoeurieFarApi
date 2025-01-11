@@ -1,0 +1,4 @@
+/venv/
+/db.sqlite3
+/admin.txt
+/app/commands/init_data.py
