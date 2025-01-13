@@ -1,8 +1,10 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework.decorators import action
 
 from app.models import Category, Post, Comment
+from app.permissions import IsAdmin
 from app.serializer import CategoryListSerializer, PostListSerializer, CategoryDetailSerializer, CommentSerializer, \
     PostDetailSerializer
 
@@ -71,6 +73,7 @@ class AdminCategoryViewset(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = CategoryListSerializer
     detail_serializer_class = CategoryDetailSerializer
+    permission_classes = [IsAdmin]
 
     def get_queryset(self):
         return Category.objects.all()
@@ -79,6 +82,7 @@ class AdminPostViewset(MultipleSerializerMixin, ModelViewSet):
 
     serializer_class = PostListSerializer
     detail_serializer_class = PostDetailSerializer
+    permission_classes = [IsAdmin]
 
     def get_queryset(self):
         return Post.objects.all()
